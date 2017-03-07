@@ -6,4 +6,4 @@ Erweiterung Contao News um MetaTags
 * Fügt TwitterCard hinzu
 * Fügt OpenGraph Tags hinzu
 
-* Betaversion, nicht ausführlich getestet
+Achtung! Betaversion, nicht ausführlich getestet
