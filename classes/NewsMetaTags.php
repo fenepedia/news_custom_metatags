@@ -11,29 +11,18 @@ class NewsMetaTags extends \Frontend
 
         //Datenbank
         $objDBResults = \Database::getInstance()->prepare(
-            "SELECT meta_title, meta_description,singleSRC from tl_news WHERE alias=? AND published=1"
+            "SELECT singleSRC from tl_news WHERE alias=? AND published=1"
         )
             ->limit(1)
             ->execute($this->Input->get('items'));
 
 
-        if ($objDBResults->numRows < 1) {
-            return; //not found !!
-        }
-
         global $objPage;
-
-        if ($objDBResults->meta_title != '') {
-            $objPage->pageTitle = $objDBResults->meta_title;
-        }
-
-        if ($objDBResults->meta_description != '') {
-            $objPage->description = $objDBResults->meta_description;
-        }
+        $this->twitter_id = '@' . \Config::get('twitter_id');
 
         //Twitter Card hinzufügen
         $GLOBALS['TL_HEAD'][] = '<meta name="twitter:card" content="summary_large_image">';
-        $GLOBALS['TL_HEAD'][] = '<meta name="twitter:site" content="@fenepedia">';
+        $GLOBALS['TL_HEAD'][] = '<meta name="twitter:site" content="' . $this->twitter_id . '">';
         $GLOBALS['TL_HEAD'][] = '<meta name="twitter:title" content="' . $objPage->pageTitle . '">';
         $GLOBALS['TL_HEAD'][] = '<meta name="twitter:description" content="' . $objPage->description . '"> ';
 
